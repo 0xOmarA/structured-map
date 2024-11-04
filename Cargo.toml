@@ -1,0 +1,16 @@
+[package]
+name = "structured-map"
+version = "0.1.0"
+edition = "2021"
+authors = ["Omar Abdulla <OmarAbdulla7@hotmail.com>"]
+readme = "README.md"
+description = "A crate for generating structured maps with a set of known keys."
+
+[dependencies]
+heck = { version = "0.5.0" }
+syn = { version = "2.0.87", features = ["full"] }
+quote = { version = "1.0.37" }
+proc-macro2 = { version = "1.0.89" }
+
+[lib]
+proc-macro = true
