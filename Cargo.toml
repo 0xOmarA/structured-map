@@ -5,6 +5,8 @@ edition = "2021"
 authors = ["Omar Abdulla <OmarAbdulla7@hotmail.com>"]
 readme = "README.md"
 description = "A crate for generating structured maps with a set of known keys."
+repository = "https://github.com/0xOmarA/structured-map"
+license = "MIT OR Apache-2.0"
 
 [dependencies]
 heck = { version = "0.5.0" }
