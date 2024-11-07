@@ -148,7 +148,7 @@ impl StructuredMapAst {
             #struct_visibility struct #struct_ident<T> {
                 #(
                     #(#key_attributes)*
-                    #key_idents: T
+                    pub #key_idents: T
                 ),*
             }
         }
