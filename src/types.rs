@@ -474,6 +474,30 @@ impl StructuredMapAst {
                 }
             }
 
+            impl ::core::convert::TryFrom<String> for #key_type_ident {
+                type Error = <#key_type_ident as ::core::str::FromStr>::Err;
+
+                fn try_from(value: String) -> Result<Self, Self::Error> {
+                    Self::from_str(value.as_str())
+                }
+            }
+
+            impl<'a> ::core::convert::TryFrom<&'a String> for #key_type_ident {
+                type Error = <#key_type_ident as ::core::str::FromStr>::Err;
+
+                fn try_from(value: &'a String) -> Result<Self, Self::Error> {
+                    Self::from_str(value.as_str())
+                }
+            }
+
+            impl<'a> ::core::convert::TryFrom<&'a str> for #key_type_ident {
+                type Error = <#key_type_ident as ::core::str::FromStr>::Err;
+
+                fn try_from(value: &'a str) -> Result<Self, Self::Error> {
+                    Self::from_str(value)
+                }
+            }
+
             impl ::core::fmt::Display for #key_type_ident {
                 fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
                     let s = match self {
@@ -881,6 +905,30 @@ mod test {
                         "key3" => Ok(Self::Key3),
                         _ => Err(())
                     }
+                }
+            }
+
+            impl ::core::convert::TryFrom<String> for MyStructKey {
+                type Error = <MyStructKey as ::core::str::FromStr>::Err;
+
+                fn try_from(value: String) -> Result<Self, Self::Error> {
+                    Self::from_str(value.as_str())
+                }
+            }
+
+            impl<'a> ::core::convert::TryFrom<&'a String> for MyStructKey {
+                type Error = <MyStructKey as ::core::str::FromStr>::Err;
+
+                fn try_from(value: &'a String) -> Result<Self, Self::Error> {
+                    Self::from_str(value.as_str())
+                }
+            }
+
+            impl<'a> ::core::convert::TryFrom<&'a str> for MyStructKey {
+                type Error = <MyStructKey as ::core::str::FromStr>::Err;
+
+                fn try_from(value: &'a str) -> Result<Self, Self::Error> {
+                    Self::from_str(value)
                 }
             }
 
