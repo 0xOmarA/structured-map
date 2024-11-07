@@ -478,7 +478,7 @@ impl StructuredMapAst {
                 type Error = <#key_type_ident as ::core::str::FromStr>::Err;
 
                 fn try_from(value: String) -> Result<Self, Self::Error> {
-                    Self::from_str(value.as_str())
+                    ::core::str::FromStr::from_str(value.as_str())
                 }
             }
 
@@ -486,7 +486,7 @@ impl StructuredMapAst {
                 type Error = <#key_type_ident as ::core::str::FromStr>::Err;
 
                 fn try_from(value: &'a String) -> Result<Self, Self::Error> {
-                    Self::from_str(value.as_str())
+                    ::core::str::FromStr::from_str(value.as_str())
                 }
             }
 
@@ -494,7 +494,7 @@ impl StructuredMapAst {
                 type Error = <#key_type_ident as ::core::str::FromStr>::Err;
 
                 fn try_from(value: &'a str) -> Result<Self, Self::Error> {
-                    Self::from_str(value)
+                    ::core::str::FromStr::from_str(value)
                 }
             }
 
@@ -912,7 +912,7 @@ mod test {
                 type Error = <MyStructKey as ::core::str::FromStr>::Err;
 
                 fn try_from(value: String) -> Result<Self, Self::Error> {
-                    Self::from_str(value.as_str())
+                    ::core::str::FromStr::from_str(value.as_str())
                 }
             }
 
@@ -920,7 +920,7 @@ mod test {
                 type Error = <MyStructKey as ::core::str::FromStr>::Err;
 
                 fn try_from(value: &'a String) -> Result<Self, Self::Error> {
-                    Self::from_str(value.as_str())
+                    ::core::str::FromStr::from_str(value.as_str())
                 }
             }
 
@@ -928,7 +928,7 @@ mod test {
                 type Error = <MyStructKey as ::core::str::FromStr>::Err;
 
                 fn try_from(value: &'a str) -> Result<Self, Self::Error> {
-                    Self::from_str(value)
+                    ::core::str::FromStr::from_str(value)
                 }
             }
 
