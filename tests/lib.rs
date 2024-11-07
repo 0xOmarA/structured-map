@@ -1,5 +1,7 @@
+use core::iter::*;
 use core::ops::*;
 use core::str::*;
+use std::collections::*;
 
 use structured_map::*;
 
@@ -347,4 +349,46 @@ fn structured_map_as_mut_returns_a_structured_map_over_references() {
 
     // Assert
     assert_eq!(as_ref_structure, expected_structure)
+}
+
+#[test]
+fn structured_map_can_be_created_from_iterator() {
+    // Arrange
+    let map = {
+        let mut map = HashMap::new();
+
+        map.insert(MyStructKey::Key1, "1");
+        map.insert(MyStructKey::Key2, "2");
+        map.insert(MyStructKey::Key3, "3");
+
+        map
+    };
+
+    // Act
+    let structured_map = MyStruct::try_from_iterator(map);
+
+    // Assert
+    assert_eq!(structured_map, Some(MyStruct::new("1", "2", "3")));
+}
+
+#[test]
+fn structured_map_cant_be_created_from_iterator_with_duplicates() {
+    // Arrange
+    let map = {
+        let mut map = HashMap::new();
+
+        map.insert(MyStructKey::Key1, "1");
+        map.insert(MyStructKey::Key2, "2");
+        map.insert(MyStructKey::Key3, "3");
+
+        map
+    };
+
+    // Act
+    let structured_map = MyStruct::try_from_iterator(
+        map.into_iter().chain(once((MyStructKey::Key1, "1"))),
+    );
+
+    // Assert
+    assert!(structured_map.is_none());
 }

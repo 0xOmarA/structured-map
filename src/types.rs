@@ -320,6 +320,33 @@ impl StructuredMapAst {
                     }
                 }
 
+                /// Attempts to construct the structured map from an iterator
+                /// over a two tuple where the first item could be converted
+                /// into a key and the second value is the value.
+                pub fn try_from_iterator<I, K>(into_iter: I) -> Option<Self>
+                where
+                    K: TryInto<#key_type_ident>,
+                    I: IntoIterator<Item = (K, T)>,
+                {
+                    let mut structure = #structure_ident::from_fn(|_| None::<T>);
+
+                    for (maybe_key, value) in into_iter.into_iter() {
+                        let key = maybe_key.try_into().ok()?;
+                        match ::core::ops::IndexMut::index_mut(&mut structure, key)
+                        {
+                            // Item already exists - the iterator contains dupes
+                            // so we fail.
+                            Some(value) => return None,
+                            // No a dupe - set the value.
+                            mut_ref @ None => {
+                                *mut_ref = Some(value)
+                            }
+                        }
+                    }
+
+                    structure.try_map(|value| value.ok_or(())).ok()
+                }
+
                 /// Creates a structure over &T
                 pub fn as_ref(&self) -> #structure_ident<&T> {
                     #structure_ident {
