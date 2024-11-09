@@ -26,7 +26,7 @@ use syn::*;
 /// ```
 ///
 /// [`structured_map`]: crate::structured_map
-#[expect(dead_code)]
+#[allow(dead_code)]
 pub struct StructuredMapAst {
     /// An invocation of the structured map macro can start with any number of
     /// attributes before the [`Ident`] of the structured and they will be
